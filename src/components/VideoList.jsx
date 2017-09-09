@@ -1,10 +1,28 @@
-var VideoList = (props) => (
-  <div className="video-list">
-    {props.videos.map((vid, index) =>
-      <VideoListEntry vid={vid} index={index}/>  
-    )}
-  </div>
-);
+class VideoList extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render () {
+    return (
+      <div className="video-list">
+        {this.props.videos.map((vid, index) =>
+          <VideoListEntry vid={vid} index={index} onVideoClick={this.props.onVideoClick} state={this.props.state} />  
+        )}
+      </div>         
+    );
+  }
+
+}
+
+
+// var VideoList = (props) => (
+//   <div className="video-list">
+//     {props.videos.map((vid, index) =>
+//       <VideoListEntry vid={vid} index={index}/>  
+//     )}
+//   </div>
+// );
 
 // ReactDOM.render(<VideoListEntry />, document.getElementsByClassName('video-list'));
 

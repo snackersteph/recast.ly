@@ -2,12 +2,10 @@ class VideoListEntry extends React.Component {
   constructor(props) {
     super(props);
   }
-  
-  onVideoClick() {
-    var newIndex = this.props.index;
-    this.setState({
-      current: {newIndex}
-    });
+
+  dataCollect() {
+    var vidIndex = this.props.index;
+    this.props.onVideoClick(vidIndex);
   }
 
   render() {
@@ -17,7 +15,8 @@ class VideoListEntry extends React.Component {
           <img className="media-object" src={this.props.vid.snippet.thumbnails.default.url} alt="" />
         </div>
         <div className="media-body">
-          <div className="video-list-entry-title" onClick={this.onVideoClick.bind(this)}>{this.props.vid.snippet.title}</div>
+          <div className="video-list-entry-title" onClick={this.dataCollect.bind(this)}>{this.props.vid.snippet.title}</div>
+          <div className="test">{this.props.index}</div>
           <div className="video-list-entry-detail">{this.props.vid.snippet.description}</div>
         </div>
       </div>
@@ -34,3 +33,6 @@ VideoListEntry.propTypes = {
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
 window.VideoListEntry = VideoListEntry;
+
+
+//write a click handler here that will grab the data and pass it to App's onVideoClick function
