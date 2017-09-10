@@ -3,20 +3,34 @@ class App extends React.Component {
     super(props);
     
     this.state = {
-      current: 0,
-      videoList: exampleVideoData,
+      videos: window.exampleVideoData,
+      currentVideo: window.exampleVideoData[0]
     };
     console.log(exampleVideoData.length);
 
     // this.onVideoClick = this.onVideoClick.bind(this);
   }
 
-  onVideoClick(vidIndex) {
-    console.log(this);
-    console.log(this.state);
-    console.log(this.state.current);
+  componentDidMount() {
+    this.getYouTubeVideos('cute kittens');
+  }
+
+  getYouTubeVideos(query) {
+    var options = {
+      key: this.props.API_KEY,
+      query: query
+    };
+
+    this.props.searchYouTube(options, (videos) => {
+      this.setState({
+        videoList: videos,
+      });
+    });
+  }
+
+  onVideoClick(video) {
     this.setState({
-      current: vidIndex
+      currentVideo: video
     });
 
     console.log(this.state.current);
@@ -26,18 +40,18 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <nav className="navbar">
+        <nav className="navbar" >
           <div className="col-md-6 offset-md-3">
             <div><h5><em>search</em> view goes here</h5></div>
           </div>
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer vid={this.state.videoList[this.state.current]} />
+            <VideoPlayer vid={this.state.currentVideo} />
           </div>
           <div className="col-md-5">
             <div>
-              <VideoList videos={exampleVideoData} onVideoClick={this.onVideoClick.bind(this)} state={this.state}/>
+              <VideoList videos={this.state.videos} onVideoClick={this.onVideoClick.bind(this)} state={this.state}/>
             </div>
           </div>
         </div>

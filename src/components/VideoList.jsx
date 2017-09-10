@@ -1,28 +1,28 @@
-class VideoList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+// class VideoList extends React.Component {
+//   constructor(props) {
+//     super(props);
+//   }
 
-  render () {
-    return (
-      <div className="video-list">
-        {this.props.videos.map((vid, index) =>
-          <VideoListEntry vid={vid} index={index} onVideoClick={this.props.onVideoClick} state={this.props.state} />  
-        )}
-      </div>         
-    );
-  }
+//   render () {
+//     return (
+//       <div className="video-list">
+//         {this.props.videos.map((vid, index) =>
+//           <VideoListEntry vid={vid} index={index} onVideoClick={this.props.onVideoClick} state={this.props.state} />  
+//         )}
+//       </div>         
+//     );
+//   }
 
-}
+// }
 
 
-// var VideoList = (props) => (
-//   <div className="video-list">
-//     {props.videos.map((vid, index) =>
-//       <VideoListEntry vid={vid} index={index}/>  
-//     )}
-//   </div>
-// );
+var VideoList = ({videos, onVideoClick}) => (
+  <div className="video-list">
+    {videos.map((vid, index) =>
+      <VideoListEntry vid={vid} key={vid.id.videoId} index={index} onVideoClick={ onVideoClick } />  
+    )}
+  </div>
+);
 
 // ReactDOM.render(<VideoListEntry />, document.getElementsByClassName('video-list'));
 
